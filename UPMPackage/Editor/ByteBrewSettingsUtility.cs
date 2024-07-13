@@ -30,6 +30,7 @@ public class ByteBrewSettingsUtility
 		//first, check if the Resources folder exists
         if (!Directory.Exists(bytebrewSettingsDirPath)) {
             Directory.CreateDirectory(bytebrewSettingsDirPath);
+			AssetDatabase.Refresh();
         }
 
 		//create the settings file
