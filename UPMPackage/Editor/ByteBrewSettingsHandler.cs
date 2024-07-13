@@ -7,7 +7,8 @@ using UnityEngine;
 public static class ByteBrewSettingsHandler
 {
     private static ByteBrewSettings _settingsInstance = null;
-    public static ByteBrewSettings SettingsInstance {
+    public static ByteBrewSettings SettingsInstance 
+    {
         get {
             if (_settingsInstance == null) {
                 _settingsInstance = GetOrCreateByteBrewSettings();
@@ -16,26 +17,32 @@ public static class ByteBrewSettingsHandler
         }
     }
 
-    public static ByteBrewSettings GetOrCreateByteBrewSettings() {
-        string bytebrewSettingsDirPath = Application.dataPath + "/ByteBrewSDK/Resources";
-        string bytebrewSettingsPath = bytebrewSettingsDirPath + "/ByteBrewSettings.asset";
-        //if settings file exists, load and return it
-        if (File.Exists(bytebrewSettingsPath)) {
-            return AssetDatabase.LoadAssetAtPath<ByteBrewSettings>(bytebrewSettingsPath);
+    private static ByteBrewSettings GetOrCreateByteBrewSettings() 
+    {
+        string bytebrewSettingsDirPath = Path.Combine("Assets", "ByteBrewSDK", "Resources");
+        string bytebrewSettingsPath = Path.Combine(bytebrewSettingsDirPath, "ByteBrewSettings.asset");
+
+        ByteBrewSettings settings = AssetDatabase.LoadAssetAtPath<ByteBrewSettings>(bytebrewSettingsPath);
+        if (settings != null) {
+            return settings;
         }
 
-        //if settings file does not exist, create it
-        //first, check if the Resources folder exists
         if (!Directory.Exists(bytebrewSettingsDirPath)) {
             Directory.CreateDirectory(bytebrewSettingsDirPath);
             AssetDatabase.Refresh();
         }
 
-        //create the settings file
-        ByteBrewSettings settings = ScriptableObject.CreateInstance<ByteBrewSettings>();
-        AssetDatabase.CreateAsset(settings, bytebrewSettingsPath);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+        try {
+            settings = ScriptableObject.CreateInstance<ByteBrewSettings>();
+
+            AssetDatabase.CreateAsset(settings, bytebrewSettingsPath);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            Debug.Log("ByteBrewSettings.asset created successfully");
+        } catch (System.Exception e) {
+            Debug.LogError("Error creating ByteBrewSettings.asset: " + e.Message);
+        }
 
         return settings;
     }

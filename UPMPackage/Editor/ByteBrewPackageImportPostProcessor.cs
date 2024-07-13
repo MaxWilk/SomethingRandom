@@ -93,6 +93,7 @@ public class ByteBrewPackageImportPostProcessor : AssetPostprocessor {
         ByteBrewSettings bbSettings = ByteBrewSettingsHandler.SettingsInstance;
 
         if (bbSettings == null) {
+            Debug.LogError("ByteBrewSettings not found in project.");
             return;
         }
 

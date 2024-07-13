@@ -15,9 +15,15 @@ namespace ByteBrewSDK
             serializedObject.Update();
             ByteBrewSettings manager = ByteBrewSettingsHandler.SettingsInstance;
 
-            Texture bytebrewLogo = (Texture)AssetDatabase.LoadAssetAtPath("Assets/ByteBrewSDK/Images/bytebrewfulllogo.png", typeof(Texture));
+            Texture bytebrewLogo = (Texture)AssetDatabase.LoadAssetAtPath("Packages/ByteBrewSDK/Images/bytebrewfulllogo.png", typeof(Texture));
 
-            GUI.DrawTexture(new Rect(15f, 30f, 275f, 75f), bytebrewLogo);
+            if (bytebrewLogo == null) {
+                bytebrewLogo = (Texture)AssetDatabase.LoadAssetAtPath("Assets/ByteBrewSDK/Images/bytebrewfulllogo.png", typeof(Texture));
+            }
+
+            if (bytebrewLogo != null) {
+                GUI.DrawTexture(new Rect(15f, 30f, 275f, 75f), bytebrewLogo);
+            }
 
             GUILayout.Space(100f); //2
             GUILayout.Label($"ByteBrew Unity SDK v{ByteBrew.SDK_VERSION}", EditorStyles.helpBox);
