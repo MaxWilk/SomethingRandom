@@ -13,7 +13,7 @@ namespace ByteBrewSDK
         {
             base.OnInspectorGUI();
             serializedObject.Update();
-            ByteBrewSettings manager = ByteBrewSettingsUtility.SettingsInstance;
+            ByteBrewSettings manager = ByteBrewSettingsHandler.SettingsInstance;
 
             Texture bytebrewLogo = (Texture)AssetDatabase.LoadAssetAtPath("Assets/ByteBrewSDK/Images/bytebrewfulllogo.png", typeof(Texture));
 

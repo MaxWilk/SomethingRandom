@@ -37,7 +37,7 @@ public static class ByteBrewOnLoadPackageImportCredsHolder {
 
     public static void SetSDKKeysToPlayerPrefs() {
         if (BBSettings == null) {
-            BBSettings = ByteBrewSettingsUtility.SettingsInstance;
+            BBSettings = ByteBrewSettingsHandler.SettingsInstance;
         }
 
         if (BBSettings == null) {
@@ -90,7 +90,7 @@ public class ByteBrewPackageImportPostProcessor : AssetPostprocessor {
     private static void DelayedMethod() {
         EditorApplication.delayCall -= DelayedMethod;
 
-        ByteBrewSettings bbSettings = ByteBrewSettingsUtility.SettingsInstance;
+        ByteBrewSettings bbSettings = ByteBrewSettingsHandler.SettingsInstance;
 
         if (bbSettings == null) {
             return;
