@@ -8,7 +8,7 @@ namespace ByteBrewSDK
 {
     public class ByteBrew : MonoBehaviour
     {
-        public static readonly string SDK_VERSION = "0.1.8";
+        public static readonly string SDK_VERSION = "0.1.9";
 
         private static ByteBrew _instance;
 
