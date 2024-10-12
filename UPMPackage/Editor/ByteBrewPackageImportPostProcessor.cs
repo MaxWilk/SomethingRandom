@@ -36,6 +36,11 @@ public static class ByteBrewOnLoadPackageImportCredsHolder {
     }
 
     public static void SetSDKKeysToPlayerPrefs() {
+#if UNITY_CLOUD_BUILD
+        Debug.Log("Unity Cloud Build detected, skipping setting SDK keys to PlayerPrefs");
+        return;
+#endif
+
         if (BBSettings == null) {
             BBSettings = ByteBrewSettingsHandler.SettingsInstance;
         }
